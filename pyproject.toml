@@ -4,7 +4,6 @@ version = "0.1.0"
 description = "task manager"
 authors = ["nickolay_kuzmin <nickolay.kuzmin2001@gmail.com>"]
 readme = "README.md"
-packages = [{include = "python_project_52"}]
 
 [tool.poetry.dependencies]
 python = "^3.8"
