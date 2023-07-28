@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-07-10 18:04+0400\n"
+"POT-Creation-Date: 2023-07-24 16:35+0400\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,18 +20,100 @@ msgstr ""
 "n%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || (n%10>=5 && n%10<=9) || "
 "(n%100>=11 && n%100<=14)? 2 : 3);\n"
 
-#: templates/index.html:17 templates/index.html:123
+#: templates/for_import/base.html:14 templates/for_import/base.html:110
 msgid "Task Manager"
 msgstr "Менеджер Задач"
 
-#: templates/index.html:130
+#: templates/for_import/base.html:117
 msgid "Users"
 msgstr "Пользователи"
 
-#: templates/index.html:135
-msgid "Log in"
+#: templates/for_import/base.html:122
+msgid "Sign in"
 msgstr "Вход"
 
-#: templates/index.html:138
-msgid "Log up"
+#: templates/for_import/base.html:125
+msgid "Sign up"
 msgstr "Регистрация"
+
+#: templates/signin.html:8 templates/signin.html:21
+#| msgid "Sign in"
+msgid "Sign In"
+msgstr "Вход"
+
+#: templates/signin.html:11 templates/signin.html:12 templates/signup.html:26
+#: templates/signup.html:27
+msgid "Username"
+msgstr "Имя пользователя"
+
+#: templates/signin.html:16 templates/signin.html:17 templates/signup.html:40
+#: templates/signup.html:41
+msgid "Password"
+msgstr "Пароль"
+
+#: templates/signup.html:7 templates/signup.html:70
+msgid "Sign Up"
+msgstr "Регистрация"
+
+#: templates/signup.html:10 templates/signup.html:11
+msgid "First Name"
+msgstr "Имя"
+
+#: templates/signup.html:13
+msgid "Your name is correct."
+msgstr "Имя корректно."
+
+#: templates/signup.html:18 templates/signup.html:19
+msgid "Last Name"
+msgstr "Фамилия"
+
+#: templates/signup.html:21
+msgid "Your last name is correct."
+msgstr "Фамилия корректна."
+
+#: templates/signup.html:29
+msgid ""
+"Required field. Length must be shorter than 150 symbols. Only literals, "
+"numbers and symbols @/./+/-/_."
+msgstr ""
+"Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./"
+"+/-/_."
+
+#: templates/signup.html:32
+msgid "Your username is correct."
+msgstr "Имя пользователя корректно."
+
+#: templates/signup.html:35
+msgid ""
+"Please enter a valid username. It can only contain letters, numbers, and @/./"
+"+/-/_."
+msgstr "Пожалуйста введите корректное имя пользователя. Оно может содержать только буквы, цифры и символы @/./+/-/_"
+
+#: templates/signup.html:44
+msgid "Your password must contains 3 symbols minimum."
+msgstr "Ваш пароль должен содержать как минимум 3 символа."
+
+#: templates/signup.html:48
+msgid "Your password is correct."
+msgstr "Пароль корректен."
+
+#: templates/signup.html:51
+msgid ""
+"The entered password is too short. It must contain at least 3 characters."
+msgstr "Введённый пароль слишком короткий. Пароль должен содержать минимум 3 символа."
+
+#: templates/signup.html:56 templates/signup.html:57
+msgid "Password Confirm"
+msgstr "Подтверждение пароля"
+
+#: templates/signup.html:59
+msgid "For comfirm your password, please, type password again."
+msgstr "Для подтверждения введите, пожалуйста, пароль ещё раз."
+
+#: templates/signup.html:62
+msgid "Confirmation success."
+msgstr "Введённые пароли совпадают. "
+
+#: templates/signup.html:65
+msgid "The entered passwords do not match."
+msgstr "Введённые пароли не совпадают."

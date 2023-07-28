@@ -1,0 +1,13 @@
+{% extends 'for_import/base.html' %}
+{% load i18n %}
+{% load django_bootstrap5 %}
+{% block content %}
+
+<h1 class="mt-5 text-center">Вход в систему</h1>
+<form action="{% url 'login_user' %}" method="post">{% csrf_token %}
+  <div class="container">
+        {% bootstrap_form form %}
+      <button type="submit" class="btn btn-success">Войти</button>
+  </div>
+</form>
+{% endblock %}
