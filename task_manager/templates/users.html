@@ -1,5 +1,34 @@
 {% extends 'for_import/base.html' %}
 {% load i18n %}
 {% block content %}
-<h1>Пользователи</h1>
+<div class="container mt-4">
+    <h1>Users</h1>
+    {% if users %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Full name</th>
+                <th>Created</th>
+                <th>Operation</th>
+            </tr>
+        </thead>
+        {% for person in users %}
+        <tr>
+            <td>{{person.id}}</td>
+            <td>{{person.username}}</td>
+            <td>{{person.first_name}} {{person.last_name}}</td>
+            <td>{{person.date_joined}}</td>
+            <td>
+                <a href="{% url 'update_user' person.id %}">Edit</a>
+                <a href="{% url 'delete_user' person.id %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        Трах тибидох
+    {% endif %}
+</div>
 {% endblock %}
