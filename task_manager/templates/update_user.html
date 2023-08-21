@@ -42,7 +42,7 @@
 
         <div class="row mb-3">
             <label for="id_password" class="form-label p-0">{% translate "Update password" %}</label>
-            <input type="password" class="form-control" name="password" id="id_password" minlength="3" placeholder='{% translate "Password" %}'>
+            <input type="password" class="form-control" name="new_password1" id="id_password" minlength="3" placeholder='{% translate "Password" %}'>
             <div id="passwordHelpBlock" class="form-text p-0">
                 <ul class="m-0">
                   <li>{% translate "Your new password must contains 3 symbols minimum." %}</li>
@@ -58,7 +58,7 @@
 
         <div class="row mb-4">
             <label for="id_password_confirm" class="form-label p-0">{% translate "Update password confirm" %}</label>
-            <input type="password" class="form-control" name="confirm_password" id="id_password_confirm" placeholder='{% translate "Password Confirm" %}'>
+            <input type="password" class="form-control" name="new_password2" id="id_password_confirm" placeholder='{% translate "Password Confirm" %}'>
             <div id="passwordcomfirmHelpBlock" class="form-text p-0">
                 {% translate "For confirm your new password, please, type new password again." %}
             </div>

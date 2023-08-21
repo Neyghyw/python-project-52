@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import index, create, update, delete
+from .views import create, delete, index, update
 
 urlpatterns = [
     path('', index, name="labels_list"),
