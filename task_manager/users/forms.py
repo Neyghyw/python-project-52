@@ -13,11 +13,18 @@ class LoginForm(Form):
 class UserUpdateForm(ModelForm, SetPasswordForm):
     def __init__(self, *args, **kwargs):
         ModelForm.__init__(self, *args, **kwargs)
-        SetPasswordForm.__init__(self, user=self.instance)
+        kwargs['user'] = kwargs.pop('instance', None)
+        SetPasswordForm.__init__(self, *args, **kwargs)
+
+    def clean(self):
+        cleaned_data = dict(self.data)
+        for key in cleaned_data.keys():
+            cleaned_data[key] = cleaned_data[key][0]
+        return cleaned_data
 
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'new_password1', 'new_password2']
+        fields = ['first_name', 'last_name', 'username']
 
 
 class UserRegisterForm(UserCreationForm):
