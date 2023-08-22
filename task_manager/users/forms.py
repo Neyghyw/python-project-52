@@ -16,12 +16,6 @@ class UserUpdateForm(ModelForm, SetPasswordForm):
         kwargs['user'] = kwargs.pop('instance', None)
         SetPasswordForm.__init__(self, *args, **kwargs)
 
-    def clean(self):
-        cleaned_data = dict(self.data)
-        for key in cleaned_data.keys():
-            cleaned_data[key] = cleaned_data[key][0]
-        return cleaned_data
-
     class Meta:
         model = User
         fields = ['first_name', 'last_name', 'username']

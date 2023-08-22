@@ -7,7 +7,7 @@ from django.views.generic.list import ListView
 from users.forms import LoginForm, UserRegisterForm, UserUpdateForm
 from django.urls import reverse_lazy
 from django.contrib.messages.views import SuccessMessageMixin
-from django.views.generic.base import ContextMixin
+
 
 class UserListView(ListView):
     template_name = 'users.html'
