@@ -1,72 +1,53 @@
-from django.contrib import messages
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
-from django.shortcuts import redirect, render, reverse
+from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
-from users.forms import LoginForm, UserRegisterForm, UserUpdateForm
-from django.urls import reverse_lazy
-from django.contrib.messages.views import SuccessMessageMixin
+
+from users.forms import UserForm
+
+from .utils import UserAccessMixin
+
+
+class UserLoginView(LoginView):
+    template_name = 'signin.html'
+    next_page = reverse_lazy('main')
+
+
+class UserLogoutView(LogoutView):
+    next_page = reverse_lazy('login_user')
 
 
 class UserListView(ListView):
+    model = User
     template_name = 'users.html'
     context_object_name = 'users'
-    model = User
 
 
-class UserCreateView(SuccessMessageMixin, CreateView):
+class UserCreateView(SuccessMessageMixin,
+                     CreateView):
     template_name = 'signup.html'
-    form_class = UserRegisterForm
+    form_class = UserForm
     success_url = reverse_lazy('login_user')
     success_message = "Success! User with username %(username)s was created."
 
-    def form_invalid(self, form):
-        if form.has_error(field='username', code='unique'):
-            messages.error(self.request, f"Sorry. User with given username already exist.")
-        else:
-            messages.error(self.request, f"Please, fill register-form fields without errors.")
-            messages.error(self.request, form.errors)
-        return redirect(reverse_lazy('create_user'))
 
-
-class UserDeleteView(SuccessMessageMixin, DeleteView):
+class UserDeleteView(SuccessMessageMixin,
+                     UserAccessMixin,
+                     DeleteView):
     model = User
     success_url = reverse_lazy('users_list')
     success_message = "Success! Chosen user was deleted."
     template_name = 'delete.html'
 
 
-class UserUpdateView(SuccessMessageMixin, UpdateView):
+class UserUpdateView(SuccessMessageMixin,
+                     UserAccessMixin,
+                     UpdateView):
     model = User
     template_name = 'update_user.html'
-    form_class = UserUpdateForm
+    form_class = UserForm
     success_url = reverse_lazy('users_list')
     success_message = "Success! User was updated."
-
-    def form_invalid(self, form):
-        messages.error(self.request, f"Please, fill form fields without errors.")
-        messages.error(self.request, form.errors)
-        return redirect(reverse_lazy('update_user', kwargs={'pk': form.instance.id}))
-
-
-def login_user(request):
-    if request.method == 'GET':
-        return render(request, 'signin.html')
-    form = LoginForm(request.POST)
-    if not form.is_valid():
-        messages.error(request, f"Please, fill form fields without errors.")
-        return redirect(reverse('login_user'))
-    user = authenticate(request, **form.cleaned_data)
-    if user is not None:
-        login(request, user)
-    else:
-        messages.error(request, "Login error. Please, check login credentials and try again.")
-        return redirect(reverse('login_user'))
-    messages.success(request, f"User \"{user.username}\" login in system.")
-    return redirect(reverse('main'))
-
-
-def logout_user(request):
-    logout(request)
-    return redirect(reverse('login_user'))

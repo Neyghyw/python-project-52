@@ -1,77 +1,17 @@
 {% extends 'for_import/base.html' %}
 {% load i18n %}
+{% load django_bootstrap5 %}
 {% block content %}
 {% if form_errors %}
 {{ form_errors }}
 {% endif %}
+<h1 class="mt-5 text-center">Регистрация</h1>
 <form action="{% url 'create_user' %}" method="post">{% csrf_token %}
-    <div class="container">
-        <div class="row mb-4 mt-5">
-            <h2 class="p-0">{% translate "Sign Up" %}</h2>
-        </div>
-        <div class="row mb-3">
-            <label for="id_first_name" class="form-label p-0">{% translate "First Name" %}</label>
-            <input type="text" name="first_name" class="form-control" id="id_first_name" placeholder='{% translate "First Name" %}' value="Валера">
-            <div class="valid-feedback">
-                {% translate "Your name is correct." %}
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <label for="id_last_name" class="form-label p-0">{% translate "Last Name" %}</label>
-            <input type="text" name="last_name" class="form-control" id="id_last_name" placeholder='{% translate "Last Name" %}' value="Прозоров">
-            <div class="valid-feedback">
-                {% translate "Your last name is correct." %}
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <label for="id_username" class="form-label p-0">{% translate "Username" %}</label>
-            <input type="text" class="form-control" name="username" id="id_username" maxlength="150" placeholder='{% translate "Username" %}' value="Pri_DUR_ko_WATTiy_SPERMOGLOT">
-            <div id="usernameHelpBlock" class="form-text p-0">
-                {% translate "Required field. Length must be shorter than 150 symbols. Only literals, numbers and symbols @/./+/-/_." %}
-            </div>
-            <div class="valid-feedback">
-                {% translate "Your username is correct." %}
-            </div>
-            <div class="invalid-feedback">
-                {% translate "Please enter a valid username. It can only contain letters, numbers, and @/./+/-/_." %}
-            </div>
-        </div>
-
-        <div class="row mb-3">
-            <label for="id_password" class="form-label p-0">{% translate "Password" %}</label>
-            <input type="password" class="form-control" name="password1" id="id_password" minlength="3" placeholder='{% translate "Password" %}' value="DSAADSDSASADDSACACDSCDSACASCVRRRRRRRPASSWORD">
-            <div id="passwordHelpBlock" class="form-text p-0">
-                <ul class="m-0">
-                  <li>{% translate "Your password must contains 3 symbols minimum." %}</li>
-                </ul>
-            </div>
-            <div class="valid-feedback">
-                {% translate "Your password is correct." %}
-            </div>
-            <div class="invalid-feedback">
-                {% translate "The entered password is too short. It must contain at least 3 characters." %}
-            </div>
-        </div>
-
-        <div class="row mb-4">
-            <label for="id_password_confirm" class="form-label p-0">{% translate "Password Confirm" %}</label>
-            <input type="password" class="form-control" name="password2" id="id_password_confirm" placeholder='{% translate "Password Confirm" %}' value="DSAADSDSASADDSACACDSCDSACASCVRRRRRRRPASSWORD">
-            <div id="passwordcomfirmHelpBlock" class="form-text p-0">
-                {% translate "For comfirm your password, please, type password again." %}
-            </div>
-            <div class="valid-feedback">
-                {% translate "Confirmation success." %}
-            </div>
-            <div class="invalid-feedback">
-                {% translate "The entered passwords do not match." %}
-            </div>
-          </div>
-          
+      <div class="container mt-5">
+          {% bootstrap_form form %}
           <div class="row mb-3">
               <button type="submit" class="btn btn-outline-primary w-25">{% translate "Sign Up" %}</button>
           </div>
-    </div>
+      </div>
 </form>
 {% endblock %}
