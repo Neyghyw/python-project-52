@@ -1,10 +1,11 @@
 from django.urls import path
 
-from .views import create, delete, index, update
+from .views import (StatusCreateView, StatusDeleteView, StatusListView,
+                    StatusUpdateView)
 
 urlpatterns = [
-    path('', index, name="statuses_list"),
-    path('create/', create, name="create_status"),
-    path('update/<int:status_id>', update, name="update_status"),
-    path('delete/<int:status_id>', delete, name="delete_status"),
+    path('', StatusListView.as_view(), name="statuses_list"),
+    path('create/', StatusCreateView.as_view(), name="create_status"),
+    path('<int:pk>/update', StatusUpdateView.as_view(), name="update_status"),
+    path('<int:pk>/delete', StatusDeleteView.as_view(), name="delete_status"),
 ]
