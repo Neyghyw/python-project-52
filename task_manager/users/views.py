@@ -11,7 +11,7 @@ from .utils import UserAccessMixin
 
 
 class UserLoginView(LoginView):
-    template_name = 'signin.html'
+    template_name = 'users/signin.html'
     next_page = reverse_lazy('main')
 
 
@@ -21,13 +21,13 @@ class UserLogoutView(LogoutView):
 
 class UserListView(ListView):
     model = User
-    template_name = 'users.html'
+    template_name = 'users/users.html'
     context_object_name = 'users'
 
 
 class UserCreateView(SuccessMessageMixin,
                      CreateView):
-    template_name = 'signup.html'
+    template_name = 'users/signup.html'
     form_class = UserForm
     success_url = reverse_lazy('login_user')
     success_message = "Success! User with username %(username)s was created."
@@ -39,14 +39,14 @@ class UserDeleteView(SuccessMessageMixin,
     model = User
     success_url = reverse_lazy('users_list')
     success_message = "Success! Chosen user was deleted."
-    template_name = 'delete.html'
+    template_name = 'users/delete.html'
 
 
 class UserUpdateView(SuccessMessageMixin,
                      UserAccessMixin,
                      UpdateView):
     model = User
-    template_name = 'update_user.html'
+    template_name = 'users/update_user.html'
     form_class = UserForm
     success_url = reverse_lazy('users_list')
     success_message = "Success! User was updated."

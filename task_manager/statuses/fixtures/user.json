@@ -1,0 +1,12 @@
+[
+  {
+    "model": "auth.user",
+    "fields": {
+        "id": 1,
+		"first_name": "Johny",
+		"last_name": "Walker",
+		"username": "blacklabelcom",
+		"password": "Blacklabel123"
+    }
+  }
+]
