@@ -3,10 +3,10 @@
     "model": "auth.user",
     "fields": {
         "id": 1,
-		"first_name": "Johny",
-		"last_name": "Walker",
-		"username": "blacklabelcom",
-		"password": "Blacklabel123"
+		"first_name": "Patrick",
+		"last_name": "Bateman",
+		"username": "MegaCHSV",
+		"password": "MegaCHSV123"
     }
   },
   {

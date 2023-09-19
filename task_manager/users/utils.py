@@ -10,7 +10,7 @@ class UserAccessMixin(AccessMixin):
         user_id = request.user.id
         manipulated_object_id = kwargs.get('pk')
         if manipulated_object_id != user_id:
-            message_text = 'Access granted only for owner.'
+            message_text = 'Access granted only for authorized owner.'
             messages.add_message(request, messages.ERROR, message_text)
             return redirect(reverse_lazy('users_list'))
         return super().dispatch(request, *args, **kwargs)

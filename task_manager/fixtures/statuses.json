@@ -1,0 +1,26 @@
+[
+  {
+    "model": "statuses.status",
+    "fields": {
+        "id": 1,
+		"name": "Status",
+        "created_at": "2023-09-14"
+    }
+  },
+    {
+    "model": "statuses.status",
+    "fields": {
+        "id": 2,
+		"name": "TheSecondStatus",
+        "created_at": "2023-09-15"
+    }
+  },
+    {
+    "model": "statuses.status",
+    "fields": {
+        "id": 3,
+		"name": "TheThirdStatus",
+        "created_at": "2023-09-15"
+    }
+  }
+]
