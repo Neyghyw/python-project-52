@@ -45,7 +45,8 @@ class CreateStatusTest(TestCase):
 
 
 class DeleteStatusTest(TestCase):
-    fixtures = ['statuses/fixtures/statuses.json', 'statuses/fixtures/user.json']
+    fixtures = ['statuses/fixtures/statuses.json',
+                'statuses/fixtures/user.json']
 
     @classmethod
     def setUpTestData(cls):
@@ -71,7 +72,8 @@ class DeleteStatusTest(TestCase):
 
 
 class UpdateStatusTest(TestCase):
-    fixtures = ['statuses/fixtures/statuses.json', 'statuses/fixtures/user.json']
+    fixtures = ['statuses/fixtures/statuses.json',
+                'statuses/fixtures/user.json']
 
     @classmethod
     def setUpTestData(cls):
@@ -93,4 +95,3 @@ class UpdateStatusTest(TestCase):
         self.send_update_status_request(pk=1)
         status = Status.objects.get(id=1)
         self.assertTrue(status.name != self.status_update_data['name'])
-

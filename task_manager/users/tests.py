@@ -36,7 +36,8 @@ class CreateUserTest(TestCase):
         compare_dicts_and_assert(self, new_user_data, required_data)
         required_password = required_data['password1']
         user_password_hash = new_user_data['password']
-        is_passwords_equal = check_password(required_password, user_password_hash)
+        is_passwords_equal = check_password(required_password,
+                                            user_password_hash)
         self.assertTrue(is_passwords_equal)
 
     def test_create_existing_user(self):
@@ -105,7 +106,8 @@ class UpdateUserTest(TestCase):
         compare_dicts_and_assert(self, user_dict, self.user_update_data)
         user_password_hash = user_dict['password']
         required_password = self.user_update_data['password1']
-        is_passwords_equal = check_password(required_password, user_password_hash)
+        is_passwords_equal = check_password(required_password,
+                                            user_password_hash)
         self.assertTrue(is_passwords_equal)
 
     def test_update_with_unauthorized_request(self):

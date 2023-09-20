@@ -1,0 +1,22 @@
+[
+  {
+    "model": "auth.user",
+    "fields": {
+        "id": 1,
+		"first_name": "Creator",
+		"last_name": "Oftask",
+		"username": "creatoroftask",
+		"password": "CreatorOfTask1234"
+    }
+  },
+  {
+    "model": "auth.user",
+    "fields": {
+        "id": 2,
+		"first_name": "Executor",
+		"last_name": "Oftask",
+		"username": "executoroftask",
+		"password": "ExecutorOfTask1234"
+    }
+  }
+]
