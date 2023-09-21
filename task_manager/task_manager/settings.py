@@ -132,3 +132,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 
 LOGIN_URL = reverse_lazy('login_user')
+
+FIXTURE_DIRS = ['fixtures']
