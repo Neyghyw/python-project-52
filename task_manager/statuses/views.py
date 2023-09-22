@@ -1,13 +1,14 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models.deletion import ProtectedError
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
-from django.db.models.deletion import ProtectedError
+
 from statuses.forms import StatusForm
 from statuses.models import Status
-from django.shortcuts import redirect
-from django.contrib import messages
 
 
 class StatusListView(ListView):

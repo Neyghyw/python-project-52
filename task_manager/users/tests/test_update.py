@@ -25,16 +25,12 @@ class UpdateUserTest(TestCase):
         response = self.client.send_post(url)
 
         form_data = self.client.form_data
-        required_first_name = form_data['first_name']
-        required_last_name = form_data['last_name']
-        required_username = form_data['username']
-        required_password = form_data['password1']
 
         updated_user = self.users.get(id=1)
-        self.assertEqual(updated_user.first_name, required_first_name)
-        self.assertEqual(updated_user.last_name, required_last_name)
-        self.assertEqual(updated_user.username, required_username)
-        self.assertTrue(check_password(required_password,
+        self.assertEqual(updated_user.first_name, form_data['first_name'])
+        self.assertEqual(updated_user.last_name, form_data['last_name'])
+        self.assertEqual(updated_user.username, form_data['username'])
+        self.assertTrue(check_password(form_data['password1'],
                                        updated_user.password))
         message = 'Success! User was updated.'
         message_presence = self.client.check_message(response, message)
