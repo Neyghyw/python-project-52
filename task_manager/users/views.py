@@ -1,6 +1,9 @@
+from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.db.models.deletion import ProtectedError
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
@@ -8,9 +11,6 @@ from django.views.generic.list import ListView
 from users.forms import UserForm
 
 from .utils import UserAccessMixin
-from django.shortcuts import redirect
-from django.contrib import messages
-from django.db.models.deletion import ProtectedError
 
 
 class UserLoginView(LoginView):

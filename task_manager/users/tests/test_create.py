@@ -2,8 +2,8 @@ from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse_lazy
+
 from .custom_test_client import CustomTestClient
-from django.contrib.messages import get_messages
 
 
 class CreateUserTest(TestCase):

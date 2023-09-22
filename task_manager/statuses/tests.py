@@ -1,8 +1,9 @@
 from django.contrib.auth.models import User
 from django.test import Client, TestCase
 from django.urls import reverse_lazy
-from statuses.models import Status
 from utils.test_utils import compare_dicts_and_assert
+
+from statuses.models import Status
 
 
 # # Create your tests here.
