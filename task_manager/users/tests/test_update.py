@@ -2,12 +2,14 @@ from django.contrib.auth.hashers import check_password
 from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse_lazy
-from .custom_test_client import CustomTestClient
+
+from .users_test_client import UsersTestClient
 
 
 class UpdateUserTest(TestCase):
     fixtures = ['users.json']
-    client_class = CustomTestClient
+    client_class = UsersTestClient
+    redirect_page = reverse_lazy("users_list")
 
     @classmethod
     def setUpTestData(cls):
@@ -32,6 +34,7 @@ class UpdateUserTest(TestCase):
         self.assertEqual(updated_user.username, form_data['username'])
         self.assertTrue(check_password(form_data['password1'],
                                        updated_user.password))
+        self.assertEqual(response['Location'], self.redirect_page)
         message = 'Success! User was updated.'
         message_presence = self.client.check_message(response, message)
         self.assertTrue(message_presence)
@@ -41,7 +44,8 @@ class UpdateUserTest(TestCase):
         url = self.get_url(pk)
         response = self.client.send_post(url)
         updated_user = User.objects.get(id=pk)
-        self.assertEqual(updated_user, self.user)  # message
+        self.assertEqual(updated_user, self.user)
+        self.assertEqual(response['Location'], self.redirect_page)
         message = 'Access granted only for authorized owner.'
         message_presence = self.client.check_message(response, message)
         self.assertTrue(message_presence)

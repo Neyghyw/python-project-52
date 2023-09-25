@@ -1,21 +1,22 @@
 from django.contrib.auth.models import User
-from django.test import Client, TestCase
+from django.test import TestCase
 from django.urls import reverse_lazy
 
 from tasks.models import Task
 
-from .custom_test_client import CustomTestClient
+from .tasks_test_client import TasksTestClient
 
 
 class UpdateTaskTest(TestCase):
     fixtures = ['users.json', 'statuses.json', 'tasks.json']
-    client_class = CustomTestClient
+    client_class = TasksTestClient
+    redirect_page = reverse_lazy("tasks_list")
 
     @classmethod
     def setUpTestData(cls):
         cls.tasks = Task.objects
         cls.user = User.objects.get(id=1)
-    
+
     def send_update_task_request(self, pk):
         url = reverse_lazy("update_task", kwargs={'pk': pk})
         return self.client.send_post(url)
@@ -32,6 +33,7 @@ class UpdateTaskTest(TestCase):
         self.assertEqual(new_task.status.id, form_data['status'])
         self.assertEqual(new_task.executor.id, form_data['executor'])
         self.assertEqual(new_task.creator.id, 1)
+        self.assertEqual(response['Location'], self.redirect_page)
         message = 'Success! Task was updated.'
         message_presence = self.client.check_message(response, message)
         self.assertTrue(message_presence)
@@ -49,6 +51,9 @@ class UpdateTaskTest(TestCase):
 
     def test_update_with_unauthorized_request(self):
         task = self.tasks.get(id=1)
-        self.send_update_task_request(pk=1)
+        response = self.send_update_task_request(pk=1)
         task_after_update = self.tasks.get(id=1)
         self.assertEqual(task, task_after_update)
+        login_url = str(reverse_lazy("login_user"))
+        redirect_location = str(response['Location'])
+        self.assertTrue(login_url in redirect_location)
