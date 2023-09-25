@@ -3,16 +3,19 @@ from django.contrib.auth.models import User
 from django.test import TestCase
 from django.urls import reverse_lazy
 
-from .custom_test_client import CustomTestClient
+from .users_test_client import UsersTestClient
 
 
 class CreateUserTest(TestCase):
-    client_class = CustomTestClient
+    client_class = UsersTestClient
     url = reverse_lazy("create_user")
+    redirect_page = reverse_lazy("login_user")
 
     def test_create_user(self):
-        self.client.send_post(self.url)
+        response = self.client.send_post(self.url)
         self.assertEqual(User.objects.count(), 1)
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(response['Location'], self.redirect_page)
 
     def test_new_user_have_required_data(self):
         response = self.client.send_post(self.url)

@@ -3,19 +3,17 @@ from django.test import Client
 
 
 class CustomTestClient(Client):
-    form_data = {'first_name': 'User',
-                 'last_name': 'Tester',
-                 'username': 'usertester',
-                 'password1': '041048Q2001',
-                 'password2': '041048Q2001'}
 
-    def send_post(self, url):
+    form_data = None
+
+    def send_post(self, url, with_form_data=True):
+        if not with_form_data:
+            return self.post(url)
         return self.post(url, self.form_data)
 
     @staticmethod
     def check_message(response, message):
         messages = list(get_messages(response.wsgi_request))
-        print(messages[0])
         count_good = len(messages) == 1
         if not messages and count_good:
             return False

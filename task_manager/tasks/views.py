@@ -3,7 +3,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
-from django.contrib import messages
+
 from tasks.models import Task
 from tasks.utils import TaskAccessMixin
 
@@ -47,4 +47,3 @@ class TasksUpdateView(SuccessMessageMixin,
     template_name = 'tasks/task_update.html'
     success_url = reverse_lazy('tasks_list')
     success_message = "Success! Task was updated."
-
