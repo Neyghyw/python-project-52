@@ -19,7 +19,7 @@ class TasksCreateView(SuccessMessageMixin,
                       CreateView):
     template_name = 'tasks/task_create.html'
     model = Task
-    fields = ['name', 'description', 'status', 'executor']
+    fields = ['name', 'description', 'status', 'label', 'executor']
     success_url = reverse_lazy('tasks_list')
     success_message = "Success! New task was created."
 

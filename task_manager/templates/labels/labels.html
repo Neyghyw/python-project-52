@@ -1,0 +1,33 @@
+{% extends 'for_import/base.html' %}
+{% load i18n %}
+{% block content %}
+<div class="container mt-4">
+    <h1>Labels</h1>
+    <a href="{% url 'create_label' %}"><button class="btn btn-info">Add label</button></a>
+    {% if labels %}
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Created at</th>
+                <th>Options</th>
+            </tr>
+        </thead>
+        {% for label in labels %}
+        <tr>
+            <td>{{ label.id }}</td>
+            <td>{{ label.name }}</td>
+            <td>{{ label.created_at }}</td>
+            <td>
+                <a href="{% url 'update_label' label.id %}">Edit</a>
+                <a href="{% url 'delete_label' label.id %}">Delete</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <h1>No labels</h1>
+    {% endif %}
+</div>
+{% endblock %}
