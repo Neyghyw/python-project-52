@@ -1,5 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
+
 from labels.models import Label
 from statuses.models import Status
 
@@ -15,9 +16,12 @@ class Task(models.Model):
 
     status = models.ForeignKey(Status,
                                on_delete=models.PROTECT,
+                               related_name='status',
                                verbose_name='Status')
 
-    label = models.ManyToManyField(Label, verbose_name='Label')
+    label = models.ManyToManyField(Label,
+                                   related_name='labels',
+                                   verbose_name='Label')
 
     creator = models.ForeignKey(User,
                                 related_name='task_creator',

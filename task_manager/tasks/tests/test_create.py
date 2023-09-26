@@ -8,7 +8,7 @@ from .tasks_test_client import TasksTestClient
 
 
 class CreateTaskTest(TestCase):
-    fixtures = ['users.json', 'statuses.json']
+    fixtures = ['users.json', 'statuses.json', 'labels.json']
     client_class = TasksTestClient
     redirect_page = reverse_lazy("tasks_list")
 
@@ -19,19 +19,21 @@ class CreateTaskTest(TestCase):
         cls.url = reverse_lazy("create_task")
 
     def check_tasks_count(self, required_quantity):
-        self.assertEqual(self.tasks.count(), required_quantity)
+        return self.tasks.count() == required_quantity
 
     def test_create_task(self):
         self.client.force_login(self.user)
         response = self.client.send_post(self.url)
-        self.check_tasks_count(1)
+        is_quantity_good = self.check_tasks_count(1)
+        self.assertTrue(is_quantity_good)
         self.assertEqual(response['Location'], self.redirect_page)
 
     def test_create_task_without_authorize(self):
         response = self.client.send_post(self.url)
         login_url = str(reverse_lazy("login_user"))
         redirect_location = str(response['Location'])
-        self.check_tasks_count(0)
+        is_quantity_good = self.check_tasks_count(0)
+        self.assertTrue(is_quantity_good)
         self.assertTrue(login_url in redirect_location)
 
     def test_new_task_have_required_data(self):
@@ -52,4 +54,5 @@ class CreateTaskTest(TestCase):
         self.client.force_login(self.user)
         self.client.send_post(self.url)
         self.client.send_post(self.url)
-        self.check_tasks_count(1)
+        is_quantity_good = self.check_tasks_count(1)
+        self.assertTrue(is_quantity_good)
