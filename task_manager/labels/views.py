@@ -1,12 +1,13 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
-from tasks.models import Task
+
 from labels.models import Label
-from django.shortcuts import redirect
-from django.contrib import messages
+from tasks.models import Task
 
 
 class LabelsListView(ListView):

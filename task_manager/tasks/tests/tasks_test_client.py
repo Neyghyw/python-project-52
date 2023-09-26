@@ -6,5 +6,6 @@ class TasksTestClient(CustomTestClient):
         'name': 'NewName',
         'description': 'NewDescription',
         'status': 1,
+        'label': [1],
         'executor': 2
     }

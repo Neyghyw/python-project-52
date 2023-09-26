@@ -8,7 +8,7 @@ from .tasks_test_client import TasksTestClient
 
 
 class UpdateTaskTest(TestCase):
-    fixtures = ['users.json', 'statuses.json', 'tasks.json']
+    fixtures = ['users.json', 'statuses.json', 'tasks.json', 'labels.json']
     client_class = TasksTestClient
     redirect_page = reverse_lazy("tasks_list")
 

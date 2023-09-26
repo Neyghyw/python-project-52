@@ -3,7 +3,6 @@ from django.test import TestCase
 from django.urls import reverse_lazy
 
 from labels.models import Label
-
 from labels.tests.labels_test_client import LabelsTestClient
 
 
@@ -19,19 +18,21 @@ class CreateLabelTest(TestCase):
         cls.url = reverse_lazy("create_label")
 
     def check_labels_count(self, required_quantity):
-        self.assertEqual(self.labels.count(), required_quantity)
+        return self.labels.count() == required_quantity
 
     def test_create_label(self):
         self.client.force_login(self.user)
         response = self.client.send_post(self.url)
-        self.check_labels_count(1)
+        is_quantity_good = self.check_labels_count(1)
+        self.assertTrue(is_quantity_good)
         self.assertEqual(response['Location'], self.redirect_page)
 
     def test_create_label_without_authorize(self):
         response = self.client.send_post(self.url)
         login_url = str(reverse_lazy("login_user"))
         redirect_location = str(response['Location'])
-        self.check_labels_count(0)
+        is_quantity_good = self.check_labels_count(0)
+        self.assertTrue(is_quantity_good)
         self.assertTrue(login_url in redirect_location)
 
     def test_new_label_have_required_data(self):
@@ -48,4 +49,5 @@ class CreateLabelTest(TestCase):
         self.client.force_login(self.user)
         self.client.send_post(self.url)
         self.client.send_post(self.url)
-        self.check_labels_count(1)
+        is_quantity_good = self.check_labels_count(1)
+        self.assertTrue(is_quantity_good)
