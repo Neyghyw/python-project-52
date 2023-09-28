@@ -2,14 +2,15 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from django.views.generic.list import ListView
-
+from tasks.filters import TaskFilter
 from tasks.models import Task
 from tasks.utils import TaskAccessMixin
+from django_filters.views import FilterView
 
 
-class TasksListView(ListView):
+class TasksListView(FilterView):
     model = Task
+    filterset_class = TaskFilter
     template_name = 'tasks/tasks.html'
     context_object_name = 'tasks'
 
