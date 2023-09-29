@@ -1,9 +1,9 @@
-from django.contrib.auth.models import User
+from task_manager.users.models import User
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from labels.models import Label
-from statuses.models import Status
+from task_manager.labels.models import Label
+from task_manager.statuses.models import Status
 
 
 # Create your models here.
@@ -12,17 +12,17 @@ class Task(models.Model):
                             unique=True,
                             verbose_name=_('Name'))
 
-    description = models.CharField(max_length=255,
-                                   verbose_name=_('Description'))
+    description = models.TextField(verbose_name=_('Description'))
 
     status = models.ForeignKey(Status,
                                on_delete=models.PROTECT,
                                related_name='status',
                                verbose_name=_('Status'))
 
-    label = models.ManyToManyField(Label,
-                                   related_name='labels',
-                                   verbose_name=_('Label'))
+    labels = models.ManyToManyField(Label,
+                                    blank=True,
+                                    related_name='labels',
+                                    verbose_name=_('Label'))
 
     creator = models.ForeignKey(User,
                                 related_name='task_creator',

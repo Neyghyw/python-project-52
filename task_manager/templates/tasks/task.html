@@ -1,0 +1,43 @@
+{% extends 'for_import/base.html' %}
+{% load i18n %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<div class="container-sm mt-4 p-0 bg-light rounded">
+    <div class="bg-dark text-white rounded py-3">
+        <h3 class="text-left mx-5">{{ task.name }}</h3>
+    </div>
+    <div class="px-5 mt-3 rounded border-bottom">
+        <h3>{{ task.description }}</h3>
+    </div>
+    <div class="px-5 mt-3 rounded border-bottom">
+        <div class="row">
+            <div class="col d-block">
+                <h4>Автор:</h4>
+                <h4>Исполнитель:</h4>
+                <h4>Статус:</h4>
+                <h4>Метки:</h4>
+                <h4>Операции:</h4>
+            </div>
+            <div class="col d-block">
+                <h4>{{ task.creator }}</h4>
+                <h4>{{ task.executor }}</h4>
+                <h4>{{ task.status }}</h4>
+                <ul>
+                    {% if task.labels.all %}
+                        {% for label in task.labels.all %}
+                            <li>{{ label }}</li>
+                        {% endfor %}
+                    {% else %}
+                     <h4>-</h4>
+                    {% endif %}
+                </ul>
+                <h4>
+                    <a href="{% url 'update_task' task.id %}">{% translate "Edit" %}</a>
+                    <a href="{% url 'delete_task' task.id %}">{% translate "Delete" %}</a>
+                </h4>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

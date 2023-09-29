@@ -1,28 +1,17 @@
 from django.contrib import messages
-from django.contrib.auth.models import User
-from django.contrib.auth.views import LoginView, LogoutView
+from task_manager.users.models import User
 from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models.deletion import ProtectedError
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.mixins import LoginRequiredMixin
 
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
-from users.forms import UserForm
+from task_manager.users.forms import UserForm
 
 from .mixins import UserAccessMixin
-
-
-class UserLoginView(LoginView):
-    template_name = 'users/signin.html'
-    next_page = reverse_lazy('main')
-
-
-class UserLogoutView(LogoutView):
-    next_page = reverse_lazy('login_user')
 
 
 class UserListView(ListView):

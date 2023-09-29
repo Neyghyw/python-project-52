@@ -1,8 +1,8 @@
-from django.contrib.auth.models import User
+from task_manager.users.models import User
 from django.test import TestCase
 from django.urls import reverse_lazy
 
-from labels.models import Label
+from task_manager.labels.models import Label
 
 from .labels_test_client import LabelsTestClient
 
@@ -29,7 +29,7 @@ class DeleteLabelTest(TestCase):
         label_owner = self.user
         self.client.force_login(label_owner)
         response = self.send_delete_label_request(pk=3)
-        good_quantity = self.labels_in_fixture-1
+        good_quantity = self.labels_in_fixture - 1
         is_quantity_good = self.check_labels_count(good_quantity)
         self.assertTrue(is_quantity_good)
         last_label = self.labels.all().first()

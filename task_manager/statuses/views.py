@@ -8,7 +8,7 @@ from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 from django.utils.translation import gettext_lazy as _
 
-from statuses.models import Status
+from task_manager.statuses.models import Status
 
 
 class StatusListView(ListView, LoginRequiredMixin):

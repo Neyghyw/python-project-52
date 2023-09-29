@@ -1,11 +1,11 @@
 import django_filters
-from django.contrib.auth.models import User
+from task_manager.users.models import User
 from django.forms import CheckboxInput, SelectMultiple
 from django.utils.translation import gettext_lazy as _
 
-from labels.models import Label
-from statuses.models import Status
-from tasks.models import Task
+from task_manager.labels.models import Label
+from task_manager.statuses.models import Status
+from task_manager.tasks.models import Task
 
 
 class TaskFilter(django_filters.FilterSet):
@@ -17,10 +17,10 @@ class TaskFilter(django_filters.FilterSet):
                                                 label=_("executor"),
                                                 localize=True)
 
-    label = django_filters.ModelMultipleChoiceFilter(queryset=Label.objects.all(),  # noqa: E501
-                                                     widget=SelectMultiple,
-                                                     label=_("label"),
-                                                     localize=True)
+    labels = django_filters.ModelMultipleChoiceFilter(queryset=Label.objects.all(),  # noqa: E501
+                                                      widget=SelectMultiple,
+                                                      label=_("label"),
+                                                      localize=True)
 
     self_tasks = django_filters.BooleanFilter(field_name='creator',
                                               label=_('only my tasks'),
@@ -36,4 +36,4 @@ class TaskFilter(django_filters.FilterSet):
 
     class Meta:
         model = Task
-        fields = ['status', 'executor', 'label', 'self_tasks']
+        fields = ['status', 'executor', 'labels', 'self_tasks']

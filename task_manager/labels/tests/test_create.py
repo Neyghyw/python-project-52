@@ -1,8 +1,8 @@
-from django.contrib.auth.models import User
+from task_manager.users.models import User
 from django.test import TestCase
 from django.urls import reverse_lazy
 
-from labels.models import Label
+from task_manager.labels.models import Label
 from labels.tests.labels_test_client import LabelsTestClient
 
 

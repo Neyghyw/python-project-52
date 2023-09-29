@@ -1,9 +1,10 @@
 [tool.poetry]
-name = "python-project-52"
+name = "hexlet-code"
 version = "0.1.0"
-description = "task manager"
+description = "Task Manager"
 authors = ["nickolay_kuzmin <nickolay.kuzmin2001@gmail.com>"]
 readme = "README.md"
+packages = [{include = "task_manager"}]
 
 [tool.poetry.dependencies]
 python = "^3.7"

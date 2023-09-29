@@ -14,6 +14,7 @@ import os
 from pathlib import Path
 import dj_database_url
 from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -24,14 +25,23 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', 'key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
 
 # https://docs.djangoproject.com/en/3.0/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'webserver',
+    '127.0.0.1',
+    '0.0.0.0',
+]
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+
+
 if RENDER_EXTERNAL_HOSTNAME:
+    DEBUG = False
     ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+else:
+    DEBUG = True
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -42,10 +52,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django_bootstrap5',
-    'users',
-    'statuses',
-    'tasks',
-    'labels',
+    'task_manager',
+    'task_manager.users',
+    'task_manager.statuses',
+    'task_manager.tasks',
+    'task_manager.labels',
 ]
 
 MIDDLEWARE = [
@@ -61,12 +72,14 @@ MIDDLEWARE = [
     'rollbar.contrib.django.middleware.RollbarNotifierMiddleware',
 ]
 
-ROLLBAR = {
-    'access_token': '5ab43de8748b426eadb4c1291ba63b6e',
-    'environment': 'development' if DEBUG else 'production',
-    'code_version': '1.0',
-    'root': BASE_DIR,
-}
+ROLLBAR_TOKEN = os.environ.get('ROLLBAR_TOKEN')
+if ROLLBAR_TOKEN:
+    ROLLBAR = {
+        'access_token': ROLLBAR_TOKEN,
+        'environment': 'development' if DEBUG else 'production',
+        'code_version': '1.0',
+        'root': BASE_DIR,
+    }
 
 ROOT_URLCONF = 'task_manager.urls'
 
@@ -91,22 +104,21 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': dj_database_url.config(
-        # Feel free to alter this value to suit your needs.
-        default='postgresql://postgres:postgres@localhost:5432/task_manager',
-        conn_max_age=600
-    )
-}
+if RENDER_EXTERNAL_HOSTNAME:
+    DATABASE = {
+        'default': dj_database_url.config(
+            # Feel free to alter this value to suit your needs.
+            default='postgresql://postgres:postgres@localhost:5432/task_manager',
+            conn_max_age=600
+        )
+    }
+else:
+    DATABASE = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 
-if not DEBUG:
-    # Tell Django to copy statics to the `staticfiles` directory
-    # in your application directory on Render.
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-    # Turn on WhiteNoise storage backend that takes care of compressing static files
-    # and creating unique names for each version so they can safely be cached forever.
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+DATABASES = {'default': DATABASE}
 
 STORAGES = {
     "staticfiles": {
@@ -135,7 +147,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-US'
+LANGUAGE_CODE = 'ru'
 
 TIME_ZONE = 'UTC'
 
@@ -144,6 +156,11 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+LANGUAGES = [
+    ("ru", _("Russian")),
+    ("en", _("English")),
+]
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -165,3 +182,5 @@ LOGIN_URL = reverse_lazy('login_user')
 FIXTURE_DIRS = ['fixtures']
 
 LOGIN_REDIRECT_URL = reverse_lazy('main')
+
+AUTH_USER_MODEL = "users.User"

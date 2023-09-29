@@ -4,7 +4,7 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
-from tasks.models import Task
+from task_manager.tasks.models import Task
 
 
 class TaskAccessMixin(AccessMixin):

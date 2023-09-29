@@ -7,8 +7,8 @@ from django.utils.translation import gettext_lazy as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
-from labels.models import Label
-from tasks.models import Task
+from task_manager.labels.models import Label
+from task_manager.tasks.models import Task
 
 
 class LabelsListView(ListView, LoginRequiredMixin):
@@ -37,7 +37,7 @@ class LabelsDeleteView(SuccessMessageMixin,
 
     def post(self, request, *args, **kwargs):
         label = Label.objects.get(id=kwargs['pk'])
-        tasks = Task.objects.filter(label=label)
+        tasks = Task.objects.filter(labels=label)
         if tasks:
             error_text = _("Operation isn't possible."
                            " This label linked with exist task.")
