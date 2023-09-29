@@ -155,3 +155,5 @@ MESSAGE_STORAGE = "django.contrib.messages.storage.cookie.CookieStorage"
 LOGIN_URL = reverse_lazy('login_user')
 
 FIXTURE_DIRS = ['fixtures']
+
+LOGIN_REDIRECT_URL = reverse_lazy('main')
