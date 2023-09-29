@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-from .views import IndexView
+from .views import IndexView, error_view
 
 urlpatterns = [
     path('', IndexView.as_view(), name='main'),
