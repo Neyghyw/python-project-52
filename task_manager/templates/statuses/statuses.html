@@ -2,15 +2,16 @@
 {% load i18n %}
 {% block content %}
 <div class="container mt-4">
-    <h1>Statuses</h1>
-    <a href="{% url 'create_status' %}"><button class="btn btn-info">Add status</button></a>
+    <h1>{% translate "Statuses" %}</h1>
+    <a href="{% url 'create_status' %}"><button class="btn btn-info">{% translate "Add status" %}</button></a>
     {% if statuses %}
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
-                <th>Created</th>
+                <th>{% translate "Name" %}</th>
+                <th>{% translate "Created" %}</th>
+                <th>{% translate "Operation" %}</th>
             </tr>
         </thead>
         {% for status in statuses %}
@@ -19,14 +20,14 @@
             <td>{{status.name}}</td>
             <td>{{status.created_at}}</td>
             <td>
-                <a href="{% url 'update_status' status.id %}">Edit</a>
-                <a href="{% url 'delete_status' status.id %}">Delete</a>
+                <a href="{% url 'update_status' status.id %}">{% translate "Edit" %}</a>
+                <a href="{% url 'delete_status' status.id %}">{% translate "Delete" %}</a>
             </td>
         </tr>
         {% endfor %}
     </table>
     {% else %}
-        <h1>No statuses</h1>
+        <h1>{% translate "No statuses" %}</h1>
     {% endif %}
 </div>
 {% endblock %}

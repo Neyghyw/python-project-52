@@ -28,7 +28,7 @@ class DeleteLabelTest(TestCase):
     def test_delete_label(self):
         label_owner = self.user
         self.client.force_login(label_owner)
-        response = self.send_delete_label_request(pk=2)
+        response = self.send_delete_label_request(pk=3)
         good_quantity = self.labels_in_fixture-1
         is_quantity_good = self.check_labels_count(good_quantity)
         self.assertTrue(is_quantity_good)
