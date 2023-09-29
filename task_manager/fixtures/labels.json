@@ -1,0 +1,26 @@
+[
+  {
+    "model": "labels.label",
+    "fields": {
+        "id": 1,
+		"name": "Label",
+        "created_at": "2023-09-14"
+    }
+  },
+  {
+    "model": "labels.label",
+    "fields": {
+        "id": 2,
+		"name": "Label2",
+        "created_at": "2023-09-15"
+    }
+  },
+  {
+    "model": "labels.label",
+    "fields": {
+        "id": 3,
+		"name": "Label3",
+        "created_at": "2023-09-15"
+    }
+  }
+]

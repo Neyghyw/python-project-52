@@ -1,0 +1,22 @@
+[
+  {
+    "model": "auth.user",
+    "fields": {
+        "id": 1,
+		"first_name": "Patrick",
+		"last_name": "Bateman",
+		"username": "MegaCHSV",
+		"password": "MegaCHSV123"
+    }
+  },
+  {
+    "model": "auth.user",
+    "fields": {
+        "id": 2,
+		"first_name": "Nickolay",
+		"last_name": "Kuzmin",
+		"username": "kuzka",
+		"password": "KuzyaKu123"
+    }
+  }
+]

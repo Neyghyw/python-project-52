@@ -1,0 +1,52 @@
+{% extends 'for_import/base.html' %}
+{% load i18n %}
+{% load django_bootstrap5 %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1>{% translate "Tasks" %}</h1>
+    <div class="contanter bg-light p-5 mb-3">
+        <h3>{% translate "Filter tasks" %}</h3>
+        <form method="get">
+            {% bootstrap_form filter.form %}
+        <input type="submit" class="btn btn-secondary"/>
+        </form>
+        <a href="{% url 'tasks_list' %}"><button class="btn btn-secondary mt-3">{% translate "Reset filter" %}</button></a>
+    </div>
+
+    <a href="{% url 'create_task' %}"><button class="btn btn-info mb-3">{% translate "Add task" %}</button></a>
+    {% if tasks %}
+    <table class="table table-striped border">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>{% translate "Name" %}</th>
+                <th>{% translate "Description" %}</th>
+                <th>{% translate "Status" %}</th>
+                <th>{% translate "Executor" %}</th>
+                <th>{% translate "Author" %}</th>
+                <th>{% translate "Created_at" %}</th>
+                <th>{% translate "Operation" %}</th>
+            </tr>
+        </thead>
+        {% for task in tasks %}
+        <tr>
+            <td>{{task.id}}</td>
+            <td>{{task.name}}</td>
+            <td>{{task.description}}</td>
+            <td>{{task.status}}</td>
+            <td>{{task.executor}}</td>
+            <td>{{task.creator}}</td>
+            <td>{{task.created_at}}</td>
+            <td>
+                <a href="{% url 'update_task' task.id %}">{% translate "Edit" %}</a>
+                <a href="{% url 'delete_task' task.id %}">{% translate "Delete" %}</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+    {% else %}
+        <h1>{% translate "No tasks" %}</h1>
+    {% endif %}
+</div>
+{% endblock %}

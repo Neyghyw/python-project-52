@@ -1,0 +1,13 @@
+{% extends 'for_import/base.html' %}
+{% load i18n %}
+{% block content %}
+{{ form_errors }}
+{% load django_bootstrap5 %}
+<h1 class="text-center mt-5">Обновить данные пользователя</h1>
+<form action="{% url 'update_user' user.id %}" method="post">{% csrf_token %}
+    <div class="container">
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-success">Обновить</button>
+    </div>
+</form>
+{% endblock %}
