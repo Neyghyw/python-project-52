@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-09-29 08:12+0000\n"
+"POT-Creation-Date: 2023-09-29 13:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -243,7 +243,7 @@ msgid "Create new Task"
 msgstr "Создать новую задачу"
 
 #: templates/tasks/task_delete.html:4
-msgid "Are you really want to delete task with"
+msgid "Are you really to want to delete task with"
 msgstr "Вы действительно хотите удалить задачу с"
 
 #: templates/tasks/task_update.html:6
@@ -294,19 +294,19 @@ msgstr "Нет пользователей"
 msgid "Access granted only for authorized owner."
 msgstr "Доступ разрешён только авторизированному владельцу."
 
-#: users/views.py:38
+#: users/views.py:39
 msgid "Success! User was created."
 msgstr "Успешно! Пользователь был создан."
 
-#: users/views.py:46
+#: users/views.py:47
 msgid "Success! Chosen user was deleted."
 msgstr "Успешно! Пользователь удалён"
 
-#: users/views.py:53
+#: users/views.py:54
 msgid "Operation isn't possible. This user linked with exist task."
 msgstr "Операция невозможна. Этот пользователь связан с задачей."
 
-#: users/views.py:66
+#: users/views.py:67
 msgid "Success! User was updated."
 msgstr "Успешно! Пользователь был обновлён."
 

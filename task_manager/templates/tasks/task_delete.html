@@ -1,7 +1,8 @@
 {% extends 'for_import/base.html' %}
+{% load i18n %}
 {% block content %}
     <div class="container text-center mt-5">
-        <h3>{% translate "Are you really want to delete task with" %} id {{ task.id }}?</h3>
+        <h3>{% translate "Are you really to want to delete task with" %} id {{ task.id }}?</h3>
         <div class="row mt-3">
             <div class="col text-end">
                 <form action="{% url 'delete_task' task.id %}" method="post"> {% csrf_token %}
