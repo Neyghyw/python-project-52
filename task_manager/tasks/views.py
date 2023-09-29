@@ -2,13 +2,15 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django_filters.views import FilterView
+from django.utils.translation import gettext_lazy as _
+
 from tasks.filters import TaskFilter
 from tasks.models import Task
-from tasks.utils import TaskAccessMixin
-from django_filters.views import FilterView
+from tasks.mixins import TaskAccessMixin
 
 
-class TasksListView(FilterView):
+class TasksListView(FilterView, LoginRequiredMixin):
     model = Task
     filterset_class = TaskFilter
     template_name = 'tasks/tasks.html'
@@ -22,7 +24,7 @@ class TasksCreateView(SuccessMessageMixin,
     model = Task
     fields = ['name', 'description', 'status', 'label', 'executor']
     success_url = reverse_lazy('tasks_list')
-    success_message = "Success! New task was created."
+    success_message = _("Success! New task was created.")
 
     def form_valid(self, form):
         form.instance.creator = self.request.user
@@ -36,7 +38,7 @@ class TasksDeleteView(SuccessMessageMixin,
     model = Task
     template_name = 'tasks/task_delete.html'
     success_url = reverse_lazy('tasks_list')
-    success_message = "Success! Chosen task was deleted."
+    success_message = _("Success! Chosen task was deleted.")
 
 
 class TasksUpdateView(SuccessMessageMixin,
@@ -47,4 +49,4 @@ class TasksUpdateView(SuccessMessageMixin,
     fields = ['name', 'description', 'status', 'executor']
     template_name = 'tasks/task_update.html'
     success_url = reverse_lazy('tasks_list')
-    success_message = "Success! Task was updated."
+    success_message = _("Success! Task was updated.")

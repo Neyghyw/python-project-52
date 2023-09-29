@@ -2,16 +2,16 @@
 {% load i18n %}
 {% block content %}
 <div class="container mt-4">
-    <h1>Labels</h1>
-    <a href="{% url 'create_label' %}"><button class="btn btn-info">Add label</button></a>
+    <h1>{% translate "Labels" %}</h1>
+    <a href="{% url 'create_label' %}"><button class="btn btn-info">{% translate "Add label" %}</button></a>
     {% if labels %}
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Name</th>
-                <th>Created at</th>
-                <th>Options</th>
+                <th>{% translate "Name" %}</th>
+                <th>{% translate "Created at" %}</th>
+                <th>{% translate "Options" %}</th>
             </tr>
         </thead>
         {% for label in labels %}
@@ -20,14 +20,14 @@
             <td>{{ label.name }}</td>
             <td>{{ label.created_at }}</td>
             <td>
-                <a href="{% url 'update_label' label.id %}">Edit</a>
-                <a href="{% url 'delete_label' label.id %}">Delete</a>
+                <a href="{% url 'update_label' label.id %}">{% translate "Edit" %}</a>
+                <a href="{% url 'delete_label' label.id %}">{% translate "Delete" %}</a>
             </td>
         </tr>
         {% endfor %}
     </table>
     {% else %}
-        <h1>No labels</h1>
+        <h1>{% translate "No labels" %}</h1>
     {% endif %}
 </div>
 {% endblock %}

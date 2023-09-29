@@ -5,12 +5,15 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.db.models.deletion import ProtectedError
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
+from django.utils.translation import gettext_lazy as _
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
 from users.forms import UserForm
 
-from .utils import UserAccessMixin
+from .mixins import UserAccessMixin
 
 
 class UserLoginView(LoginView):
@@ -33,7 +36,7 @@ class UserCreateView(SuccessMessageMixin,
     template_name = 'users/signup.html'
     form_class = UserForm
     success_url = reverse_lazy('login_user')
-    success_message = "Success! User with username %(username)s was created."
+    success_message = _("Success! User was created.")
 
 
 class UserDeleteView(SuccessMessageMixin,
@@ -41,15 +44,15 @@ class UserDeleteView(SuccessMessageMixin,
                      DeleteView):
     model = User
     success_url = reverse_lazy('users_list')
-    success_message = "Success! Chosen user was deleted."
+    success_message = _("Success! Chosen user was deleted.")
     template_name = 'users/delete.html'
 
     def post(self, request, *args, **kwargs):
         try:
             return super().post(request, *args, **kwargs)
         except ProtectedError:
-            error_text = ("Operation isn't possible."
-                          " This user linked with exist task.")
+            error_text = _("Operation isn't possible."
+                           " This user linked with exist task.")
             messages.add_message(request, messages.ERROR, error_text)
             return redirect(self.success_url)
 
@@ -61,4 +64,4 @@ class UserUpdateView(SuccessMessageMixin,
     template_name = 'users/update_user.html'
     form_class = UserForm
     success_url = reverse_lazy('users_list')
-    success_message = "Success! User was updated."
+    success_message = _("Success! User was updated.")

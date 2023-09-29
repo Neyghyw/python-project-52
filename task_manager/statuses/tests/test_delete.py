@@ -8,7 +8,7 @@ from .statuses_test_client import StatusesTestClient
 
 
 class DeleteStatusTest(TestCase):
-    fixtures = ['statuses.json', 'users.json', 'tasks.json']
+    fixtures = ['statuses.json', 'users.json', 'tasks.json', 'labels.json']
     client_class = StatusesTestClient
     redirect_page = reverse_lazy("statuses_list")
 

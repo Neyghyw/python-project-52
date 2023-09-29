@@ -29,8 +29,7 @@ class CreateUserTest(TestCase):
         self.assertEqual(new_user.last_name, required_last_name)
         self.assertEqual(new_user.username, required_username)
         self.assertTrue(check_password(required_password, new_user.password))
-        message = (f'Success! User with username '
-                   f'{new_user.username} was created.')
+        message = 'Success! User was created.'
         message_presence = self.client.check_message(response, message)
         self.assertTrue(message_presence)
 

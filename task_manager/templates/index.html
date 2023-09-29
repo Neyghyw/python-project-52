@@ -1,7 +1,10 @@
 {% extends 'for_import/base.html' %}
-
+{% load i18n %}
 {% block content %}
-<h1>
-    Типа главная страничка. Всё тут хорошо и красочно!
-</h1>
+<div class="container py-5">
+      <h1 class="text-body-emphasis text-center">{% translate "Welcome to Task Manager!" %}</h1>
+      <p class="col-lg-8 mx-auto lead text-center">
+        {% translate "Here you can plan <code>tasks</code>, add labels and statuses." %}
+      </p>
+</div>
 {% endblock %}

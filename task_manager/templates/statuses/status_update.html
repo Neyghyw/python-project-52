@@ -3,11 +3,11 @@
 {% block content %}
 {{ form_errors }}
 {% load django_bootstrap5 %}
-<h1 class="text-center mt-5">Update status</h1>
+<h1 class="text-center mt-5">{% translate "Update status" %}</h1>
 <form action="{% url 'update_status' status.id %}" method="post">{% csrf_token %}
     <div class="container">
         {% bootstrap_form form %}
-        <button type="submit" class="btn btn-success">Update</button>
+        <button type="submit" class="btn btn-success">{% translate "Update" %}</button>
     </div>
 </form>
 {% endblock %}

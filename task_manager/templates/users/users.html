@@ -2,16 +2,16 @@
 {% load i18n %}
 {% block content %}
 <div class="container mt-4">
-    <h1>Users</h1>
+    <h1>{% translate "Users" %}</h1>
     {% if users %}
     <table class="table table-striped">
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Username</th>
-                <th>Full name</th>
-                <th>Created</th>
-                <th>Operation</th>
+                <th>{% translate "Username" %}</th>
+                <th>{% translate "Full name" %}</th>
+                <th>{% translate "Created" %}</th>
+                <th>{% translate "Operation" %}</th>
             </tr>
         </thead>
         {% for person in users %}
@@ -21,14 +21,14 @@
             <td>{{person.first_name}} {{person.last_name}}</td>
             <td>{{person.date_joined}}</td>
             <td>
-                <a href="{% url 'update_user' person.id %}">Edit</a>
-                <a href="{% url 'delete_user' person.id %}">Delete</a>
+                <a href="{% url 'update_user' person.id %}">{% translate "Edit" %}</a>
+                <a href="{% url 'delete_user' person.id %}">{% translate "Delete" %}</a>
             </td>
         </tr>
         {% endfor %}
     </table>
     {% else %}
-        <h1>No users</h1>
+        <h1>{% translate "No users" %}</h1>
     {% endif %}
 </div>
 {% endblock %}
