@@ -45,7 +45,7 @@ class LabelsDeleteView(LoginRequiredMixin, DeleteView):
         if tasks:
             error_text = _("Operation isn't possible."
                            " This label linked with exist task.")
-            messages.add_message(request, messages.ERROR, error_text)
+            messages.error(request, error_text)
             return redirect(self.success_url)
-        messages.add_message(request, messages.INFO, self.success_message)
+        messages.info(request, self.success_message)
         return super().post(request, *args, **kwargs)

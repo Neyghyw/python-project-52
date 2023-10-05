@@ -50,7 +50,6 @@ class TasksUpdateView(LoginRequiredMixin,
 
 class TasksDeleteView(LoginRequiredMixin,
                       TaskAccessMixin,
-                      SuccessMessageMixin,
                       DeleteView):
     model = Task
     template_name = 'delete.html'

@@ -49,9 +49,9 @@ class UserDeleteView(UserAccessMixin, DeleteView):
         referenced_tasks = Task.objects.filter(filter_expression)
 
         if not referenced_tasks:
-            messages.add_message(request, messages.INFO, self.success_message)
+            messages.info(request, self.success_message)
             return super().post(request, *args, **kwargs)
 
         error_text = _('This user linked with exist task.')
-        messages.add_message(request, messages.ERROR, error_text)
+        messages.error(request, error_text)
         return redirect(self.success_url)

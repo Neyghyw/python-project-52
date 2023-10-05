@@ -17,10 +17,10 @@ class UserLoginView(SuccessMessageMixin, LoginView):
     success_message = _("Success! You were logged.")
 
 
-class UserLogoutView(SuccessMessageMixin, LogoutView):
+class UserLogoutView(LogoutView):
     next_page = reverse_lazy('main')
 
     def dispatch(self, request, *args, **kwargs):
         response = super().dispatch(request, *args, **kwargs)
-        messages.add_message(request, messages.INFO, _("Success! You are not logged."))
+        messages.info(request, _("Success! You are not logged."))
         return response
