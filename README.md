@@ -8,6 +8,9 @@
 Hello!
 
 This web app is simple task manager on Django.
+Here you can create your tasks. Task has status and labels(optional).
+This project has english-russian localization.
+
 
 The app is available by link: https://task-manager-dhm9.onrender.com
 
