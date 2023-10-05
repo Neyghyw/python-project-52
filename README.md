@@ -20,20 +20,12 @@ python manage.py ruserver
 ```
 
 ### Tech stack
-Linux OS
-
-python = "^3.7"
-
-dj-database-url = "^2.0.0"
-
-django-bootstrap5 = "^23.3"
-
-django-filter = "^23.3"
-
-gunicorn = "^21.2.0"
-
-whitenoise = "^6.5.0"
-
-psycopg2-binary = "^2.9.8"
-
-rollbar = "^0.16.3"
+* Linux OS
+* python = "^3.7"
+* dj-database-url = "^2.0.0"
+* django-bootstrap5 = "^23.3"
+* django-filter = "^23.3"
+* gunicorn = "^21.2.0"
+* whitenoise = "^6.5.0"
+* psycopg2-binary = "^2.9.8"
+* rollbar = "^0.16.3"
