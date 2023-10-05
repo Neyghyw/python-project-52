@@ -35,8 +35,8 @@ class DeleteStatusTest(TestCase):
         self.client.force_login(self.user)
         response = self.send_delete_status_request(pk=1)
         self.assertEqual(self.statuses.count(), self.statuses_in_fixture)
-        message = ("Operation isn't possible. "
-                   "This status linked with exist task.")
+        message = ('Sorry, This object related with another table.'
+                   ' Permission denied.')
         message_presence = StatusesTestClient.check_message(response, message)
         self.assertTrue(message_presence)
 

@@ -39,7 +39,8 @@ class DeleteUserTest(TestCase):
         user = self.users.get(id=3)
         self.client.force_login(user)
         response = self.send_delete_user_request(pk=3)
-        message = 'This user linked with exist task.'
+        message = ('Sorry, This object related with another table.'
+                   ' Permission denied.')
         message_presence = UsersTestClient.check_message(response, message)
         self.assertTrue(message_presence)
 

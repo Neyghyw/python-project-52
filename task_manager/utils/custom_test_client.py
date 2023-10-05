@@ -19,6 +19,4 @@ class CustomTestClient(Client):
             return False
         received_message = str(messages[0])
         message_good = received_message == _(message)
-        if not message_good:
-            print(received_message)
         return message_good

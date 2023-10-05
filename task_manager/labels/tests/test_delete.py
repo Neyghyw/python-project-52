@@ -43,8 +43,8 @@ class DeleteLabelTest(TestCase):
         self.client.force_login(self.user)
         response = self.send_delete_label_request(pk=1)
         self.assertEqual(self.labels.count(), self.labels_in_fixture)
-        message = ("Operation isn't possible."
-                   " This label linked with exist task.")
+        message = ('Sorry, This object related with another table.'
+                   ' Permission denied.')
         message_presence = self.client.check_message(response, message)
         self.assertTrue(message_presence)
 

@@ -1,14 +1,12 @@
-from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic.list import ListView
 
+from task_manager.labels.mixins import LabelAccessMixin
 from task_manager.labels.models import Label
-from task_manager.tasks.models import Task
 
 
 class LabelsListView(ListView, LoginRequiredMixin):
@@ -33,19 +31,8 @@ class LabelsUpdateView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
     success_message = _('Success! Label was updated.')
 
 
-class LabelsDeleteView(LoginRequiredMixin, DeleteView):
+class LabelsDeleteView(LabelAccessMixin, LoginRequiredMixin, DeleteView):
     model = Label
     template_name = 'delete.html'
     success_url = reverse_lazy('labels_list')
     success_message = _('Success! Chosen label was deleted.')
-
-    def post(self, request, *args, **kwargs):
-        label = self.get_object()
-        tasks = Task.objects.filter(labels=label)
-        if tasks:
-            error_text = _("Operation isn't possible."
-                           " This label linked with exist task.")
-            messages.error(request, error_text)
-            return redirect(self.success_url)
-        messages.info(request, self.success_message)
-        return super().post(request, *args, **kwargs)

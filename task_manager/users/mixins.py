@@ -1,18 +1,23 @@
 from django.contrib import messages
-from django.contrib.auth.mixins import AccessMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Q
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.mixins import LoginRequiredMixin
+
+from task_manager.mixins import RelatedObjectAccessMixin
+from task_manager.tasks.models import Task
 
 
-class UserAccessMixin(LoginRequiredMixin, AccessMixin):
+class UserAccessMixin(LoginRequiredMixin, RelatedObjectAccessMixin):
 
     def dispatch(self, request, *args, **kwargs):
-        user_id = request.user.id
-        manipulated_object_id = kwargs.get('pk')
-        if manipulated_object_id != user_id:
-            message_text = _('Access granted only for authorized owner.')
-            messages.add_message(request, messages.ERROR, message_text)
+        if kwargs.get('pk') != request.user.id:
+            messages.error(request, _('Access granted'
+                                      ' only for authorized owner.'))
             return redirect(reverse_lazy('users_list'))
+
+        user = request.user
+        self.related_model = Task
+        self.dispatch_constraint = Q(creator=user) | Q(executor=user)
         return super().dispatch(request, *args, **kwargs)
