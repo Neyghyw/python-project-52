@@ -1,8 +1,8 @@
-from task_manager.users.models import User
 from django.test import TestCase
 from django.urls import reverse_lazy
 
 from task_manager.labels.models import Label
+from task_manager.users.models import User
 
 from .labels_test_client import LabelsTestClient
 
@@ -10,7 +10,7 @@ from .labels_test_client import LabelsTestClient
 class UpdateLabelTest(TestCase):
     fixtures = ['users.json', 'labels.json']
     client_class = LabelsTestClient
-    redirect_page = reverse_lazy("labels_list")
+    redirect_page = reverse_lazy('labels_list')
 
     @classmethod
     def setUpTestData(cls):
@@ -18,7 +18,7 @@ class UpdateLabelTest(TestCase):
         cls.user = User.objects.get(id=1)
 
     def send_update_label_request(self, pk):
-        url = reverse_lazy("update_label", kwargs={'pk': pk})
+        url = reverse_lazy('update_label', kwargs={'pk': pk})
         return self.client.send_post(url)
 
     def test_update_label(self):
@@ -39,6 +39,6 @@ class UpdateLabelTest(TestCase):
         response = self.send_update_label_request(pk=1)
         label_after_update = self.labels.get(id=1)
         self.assertEqual(label, label_after_update)
-        login_url = str(reverse_lazy("login_user"))
+        login_url = str(reverse_lazy('login_user'))
         redirect_location = str(response['Location'])
         self.assertTrue(login_url in redirect_location)

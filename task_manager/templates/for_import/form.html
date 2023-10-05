@@ -1,0 +1,13 @@
+{% extends 'for_import/base.html' %}
+{% load i18n %}
+{% block content %}
+{{ form_errors }}
+{% load django_bootstrap5 %}
+<h1 class="text-center mt-5">{% block title %}{% endblock %}</h1>
+<form method="post">{% csrf_token %}
+    <div class="container">
+        {% bootstrap_form form %}
+        <button type="submit" class="btn btn-success">{% block submit_label %}{% endblock %}</button>
+    </div>
+</form>
+{% endblock %}

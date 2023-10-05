@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
+
 import dj_database_url
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _

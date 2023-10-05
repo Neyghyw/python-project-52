@@ -1,22 +1,42 @@
 [
   {
-    "model": "auth.user",
+    "model": "users.user",
     "fields": {
         "id": 1,
-		"first_name": "Patrick",
-		"last_name": "Bateman",
-		"username": "MegaCHSV",
-		"password": "MegaCHSV123"
+        "first_name": "Elbert",
+        "last_name": "Abshire",
+        "username": "elbert-abshire",
+        "password": "HQN7mD9mbM"
     }
   },
   {
-    "model": "auth.user",
+    "model": "users.user",
     "fields": {
         "id": 2,
-		"first_name": "Nickolay",
-		"last_name": "Kuzmin",
-		"username": "kuzka",
-		"password": "KuzyaKu123"
+        "first_name": "Lawrence",
+        "last_name": "Kulas",
+        "username": "lawrence-kulas",
+        "password": "T3LFhdQf6Y"
+    }
+  },
+    {
+    "model": "users.user",
+    "fields": {
+        "id": 3,
+        "first_name": "Gogen",
+        "last_name": "Solncwes",
+        "username": "gogag",
+        "password": "T3LFhAvdQf6Y"
+    }
+  },
+    {
+    "model": "users.user",
+    "fields": {
+        "id": 4,
+        "first_name": "Zakir",
+        "last_name": "Magomedov",
+        "username": "zakirchick",
+        "password": "T3LFhdQf6Y"
     }
   }
 ]

@@ -1,15 +1,16 @@
 from django.contrib.auth.hashers import check_password
-from task_manager.users.models import User
 from django.test import TestCase
 from django.urls import reverse_lazy
+
+from task_manager.users.models import User
 
 from .users_test_client import UsersTestClient
 
 
 class CreateUserTest(TestCase):
     client_class = UsersTestClient
-    url = reverse_lazy("create_user")
-    redirect_page = reverse_lazy("login_user")
+    url = reverse_lazy('create_user')
+    redirect_page = reverse_lazy('login_user')
 
     def test_create_user(self):
         response = self.client.send_post(self.url)

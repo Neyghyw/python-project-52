@@ -1,4 +1,4 @@
-from utils.custom_test_client import CustomTestClient
+from task_manager.utils.custom_test_client import CustomTestClient
 
 
 class TasksTestClient(CustomTestClient):
@@ -6,6 +6,6 @@ class TasksTestClient(CustomTestClient):
         'name': 'NewName',
         'description': 'NewDescription',
         'status': 1,
-        'label': [1],
+        'labels': [1],
         'executor': 2
     }

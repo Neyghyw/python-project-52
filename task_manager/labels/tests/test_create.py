@@ -1,21 +1,21 @@
-from task_manager.users.models import User
 from django.test import TestCase
 from django.urls import reverse_lazy
 
 from task_manager.labels.models import Label
-from labels.tests.labels_test_client import LabelsTestClient
+from task_manager.labels.tests.labels_test_client import LabelsTestClient
+from task_manager.users.models import User
 
 
 class CreateLabelTest(TestCase):
     fixtures = ['users.json']
     client_class = LabelsTestClient
-    redirect_page = reverse_lazy("labels_list")
+    redirect_page = reverse_lazy('labels_list')
 
     @classmethod
     def setUpTestData(cls):
         cls.user = User.objects.get(id=1)
         cls.labels = Label.objects
-        cls.url = reverse_lazy("create_label")
+        cls.url = reverse_lazy('create_label')
 
     def check_labels_count(self, required_quantity):
         return self.labels.count() == required_quantity
@@ -29,7 +29,7 @@ class CreateLabelTest(TestCase):
 
     def test_create_label_without_authorize(self):
         response = self.client.send_post(self.url)
-        login_url = str(reverse_lazy("login_user"))
+        login_url = str(reverse_lazy('login_user'))
         redirect_location = str(response['Location'])
         is_quantity_good = self.check_labels_count(0)
         self.assertTrue(is_quantity_good)

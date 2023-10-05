@@ -349,7 +349,7 @@ msgid "Success! Chosen user was deleted."
 msgstr "Пользователь успешно удален"
 
 #: task_manager/users/views.py:43
-msgid "Operation isn't possible. This user linked with exist task."
+msgid "This user linked with exist task."
 msgstr "Операция невозможна. Этот пользователь связан с задачей."
 
 #: task_manager/users/views.py:56

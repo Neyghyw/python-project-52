@@ -1,4 +1,4 @@
-from utils.custom_test_client import CustomTestClient
+from task_manager.utils.custom_test_client import CustomTestClient
 
 
 class UsersTestClient(CustomTestClient):

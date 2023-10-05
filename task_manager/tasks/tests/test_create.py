@@ -1,8 +1,8 @@
-from task_manager.users.models import User
 from django.test import TestCase
 from django.urls import reverse_lazy
 
 from task_manager.tasks.models import Task
+from task_manager.users.models import User
 
 from .tasks_test_client import TasksTestClient
 
@@ -10,13 +10,13 @@ from .tasks_test_client import TasksTestClient
 class CreateTaskTest(TestCase):
     fixtures = ['users.json', 'statuses.json', 'labels.json']
     client_class = TasksTestClient
-    redirect_page = reverse_lazy("tasks_list")
+    redirect_page = reverse_lazy('tasks_list')
 
     @classmethod
     def setUpTestData(cls):
         cls.user = User.objects.get(id=1)
         cls.tasks = Task.objects
-        cls.url = reverse_lazy("create_task")
+        cls.url = reverse_lazy('create_task')
 
     def check_tasks_count(self, required_quantity):
         return self.tasks.count() == required_quantity
@@ -30,7 +30,7 @@ class CreateTaskTest(TestCase):
 
     def test_create_task_without_authorize(self):
         response = self.client.send_post(self.url)
-        login_url = str(reverse_lazy("login_user"))
+        login_url = str(reverse_lazy('login_user'))
         redirect_location = str(response['Location'])
         is_quantity_good = self.check_tasks_count(0)
         self.assertTrue(is_quantity_good)

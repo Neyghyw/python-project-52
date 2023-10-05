@@ -1,8 +1,8 @@
-from task_manager.users.models import User
 from django.test import TestCase
 from django.urls import reverse_lazy
 
 from task_manager.statuses.models import Status
+from task_manager.users.models import User
 
 from .statuses_test_client import StatusesTestClient
 
@@ -10,8 +10,8 @@ from .statuses_test_client import StatusesTestClient
 class UpdateStatusTest(TestCase):
     fixtures = ['statuses.json', 'users.json']
     client_class = StatusesTestClient
-    url = reverse_lazy("update_status", kwargs={'pk': 1})
-    redirect_page = reverse_lazy("statuses_list")
+    url = reverse_lazy('update_status', kwargs={'pk': 1})
+    redirect_page = reverse_lazy('statuses_list')
 
     @classmethod
     def setUpTestData(cls):
@@ -34,6 +34,6 @@ class UpdateStatusTest(TestCase):
         response = self.client.send_post(self.url)
         status_after_update = self.statuses.get(id=1)
         self.assertEqual(old_status, status_after_update)
-        login_url = str(reverse_lazy("login_user"))
+        login_url = str(reverse_lazy('login_user'))
         redirect_location = str(response['Location'])
         self.assertTrue(login_url in redirect_location)

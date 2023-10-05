@@ -1,7 +1,8 @@
 from django.contrib.auth.hashers import check_password
-from task_manager.users.models import User
 from django.test import TestCase
 from django.urls import reverse_lazy
+
+from task_manager.users.models import User
 
 from .users_test_client import UsersTestClient
 
@@ -9,7 +10,7 @@ from .users_test_client import UsersTestClient
 class UpdateUserTest(TestCase):
     fixtures = ['users.json']
     client_class = UsersTestClient
-    redirect_page = reverse_lazy("users_list")
+    redirect_page = reverse_lazy('users_list')
 
     @classmethod
     def setUpTestData(cls):
@@ -18,7 +19,7 @@ class UpdateUserTest(TestCase):
 
     @staticmethod
     def get_url(pk):
-        return reverse_lazy("update_user", kwargs={'pk': pk})
+        return reverse_lazy('update_user', kwargs={'pk': pk})
 
     def test_update_user(self):
         self.client.force_login(self.user)

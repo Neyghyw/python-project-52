@@ -1,8 +1,8 @@
-from task_manager.users.models import User
 from django.test import TestCase
 from django.urls import reverse_lazy
 
 from task_manager.statuses.models import Status
+from task_manager.users.models import User
 
 from .statuses_test_client import StatusesTestClient
 
@@ -11,8 +11,8 @@ from .statuses_test_client import StatusesTestClient
 class CreateStatusTest(TestCase):
     fixtures = ['users.json']
     client_class = StatusesTestClient
-    url = reverse_lazy("create_status")
-    redirect_page = reverse_lazy("statuses_list")
+    url = reverse_lazy('create_status')
+    redirect_page = reverse_lazy('statuses_list')
 
     @classmethod
     def setUpTestData(cls):
@@ -31,7 +31,7 @@ class CreateStatusTest(TestCase):
     def test_create_status_without_authorize(self):
         response = self.client.send_post(self.url)
         self.assertEqual(self.statuses.count(), 0)
-        login_url = str(reverse_lazy("login_user"))
+        login_url = str(reverse_lazy('login_user'))
         redirect_location = str(response['Location'])
         self.assertTrue(login_url in redirect_location)
 

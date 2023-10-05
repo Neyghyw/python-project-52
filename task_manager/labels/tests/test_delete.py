@@ -1,8 +1,8 @@
-from task_manager.users.models import User
 from django.test import TestCase
 from django.urls import reverse_lazy
 
 from task_manager.labels.models import Label
+from task_manager.users.models import User
 
 from .labels_test_client import LabelsTestClient
 
@@ -10,7 +10,7 @@ from .labels_test_client import LabelsTestClient
 class DeleteLabelTest(TestCase):
     fixtures = ['users.json', 'tasks.json', 'labels.json', 'statuses.json']
     client_class = LabelsTestClient
-    redirect_page = reverse_lazy("labels_list")
+    redirect_page = reverse_lazy('labels_list')
 
     @classmethod
     def setUpTestData(cls):
@@ -19,7 +19,7 @@ class DeleteLabelTest(TestCase):
         cls.user = User.objects.get(id=1)
 
     def send_delete_label_request(self, pk):
-        url = reverse_lazy("delete_label", kwargs={'pk': pk})
+        url = reverse_lazy('delete_label', kwargs={'pk': pk})
         return self.client.send_post(url, with_form_data=False)
 
     def check_labels_count(self, required_quantity):
@@ -52,6 +52,6 @@ class DeleteLabelTest(TestCase):
         response = self.send_delete_label_request(pk=1)
         is_quantity_good = self.check_labels_count(self.labels_in_fixture)
         self.assertTrue(is_quantity_good)
-        login_url = str(reverse_lazy("login_user"))
+        login_url = str(reverse_lazy('login_user'))
         redirect_location = str(response['Location'])
         self.assertTrue(login_url in redirect_location)

@@ -1,16 +1,16 @@
-from task_manager.users.models import User
 from django.test import Client, TestCase
 from django.urls import reverse_lazy
 
 from task_manager.labels.models import Label
 from task_manager.statuses.models import Status
 from task_manager.tasks.models import Task
+from task_manager.users.models import User
 
 
 class CreateTaskTest(TestCase):
     fixtures = ['users.json', 'statuses.json', 'labels.json', 'tasks.json']
     client = Client
-    redirect_page = reverse_lazy("tasks_list")
+    redirect_page = reverse_lazy('tasks_list')
     user = User.objects.get(id=1)
 
     @classmethod
@@ -31,8 +31,8 @@ class CreateTaskTest(TestCase):
 
     def test_filter_by_label(self):
         label = Label.objects.get(id=1)
-        required_tasks = Task.objects.filter(label=label)
-        url = f'{self.redirect_page}?label=1'
+        required_tasks = Task.objects.filter(labels=label)
+        url = f'{self.redirect_page}?labels=1'
         response = self.client.get(url)
         received_tasks = response.context['tasks']
         self.assertEqual(response.status_code, 200)
@@ -59,10 +59,10 @@ class CreateTaskTest(TestCase):
         status = Status.objects.get(id=1)
         executor = User.objects.get(id=2)
         required_tasks = Task.objects.filter(creator=self.user,
-                                             label=label,
+                                             labels=label,
                                              status=status,
                                              executor=executor)
-        url = f'{self.redirect_page}?status=1&executor=2&label=1&self_tasks=on'  # noqa: E501
+        url = f'{self.redirect_page}?status=1&executor=2&labels=1&self_tasks=on'  # noqa: E501
         response = self.client.get(url)
         received_tasks = response.context['tasks']
         self.assertEqual(response.status_code, 200)

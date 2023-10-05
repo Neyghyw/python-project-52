@@ -1,14 +1,15 @@
-from task_manager.users.models import User
 from django.test import TestCase
 from django.urls import reverse_lazy
+
+from task_manager.users.models import User
 
 from .users_test_client import UsersTestClient
 
 
 class DeleteUserTest(TestCase):
-    fixtures = ['users.json']
+    fixtures = ['users.json', 'tasks.json', 'statuses.json', 'labels.json']
     client_class = UsersTestClient
-    redirect_page = reverse_lazy("users_list")
+    redirect_page = reverse_lazy('users_list')
 
     @classmethod
     def setUpTestData(cls):
@@ -16,7 +17,7 @@ class DeleteUserTest(TestCase):
         cls.users_in_fixture = cls.users.count()
 
     def send_delete_user_request(self, pk):
-        url = reverse_lazy("delete_user", kwargs={'pk': pk})
+        url = reverse_lazy('delete_user', kwargs={'pk': pk})
         return self.client.send_post(url, with_form_data=False)
 
     def check_users_count(self, required_quantity):
@@ -31,6 +32,14 @@ class DeleteUserTest(TestCase):
         self.assertTrue(last_user.id == 2)
         self.assertEqual(response['Location'], self.redirect_page)
         message = 'Success! Chosen user was deleted.'
+        message_presence = UsersTestClient.check_message(response, message)
+        self.assertTrue(message_presence)
+
+    def test_delete_user_with_task(self):
+        user = self.users.get(id=3)
+        self.client.force_login(user)
+        response = self.send_delete_user_request(pk=3)
+        message = 'This user linked with exist task.'
         message_presence = UsersTestClient.check_message(response, message)
         self.assertTrue(message_presence)
 
