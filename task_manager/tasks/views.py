@@ -12,7 +12,7 @@ from task_manager.tasks.mixins import TaskAccessMixin
 from task_manager.tasks.models import Task
 
 
-class TasksListView(FilterView, LoginRequiredMixin):
+class TasksListView(LoginRequiredMixin, FilterView):
     model = Task
     filterset_class = TaskFilter
     template_name = 'tasks/tasks.html'

@@ -35,7 +35,7 @@ ALLOWED_HOSTS = [
 ]
 
 RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-
+DATABASE_URL = os.environ.get('DATABASE_URL')
 
 if RENDER_EXTERNAL_HOSTNAME:
     DEBUG = False
@@ -109,7 +109,7 @@ if RENDER_EXTERNAL_HOSTNAME:
     DATABASE = {
         'default': dj_database_url.config(
             # Feel free to alter this value to suit your needs.
-            default='postgresql://postgres:postgres@localhost:5432/task_manager',
+            default=DATABASE_URL,
             conn_max_age=600
         )
     }

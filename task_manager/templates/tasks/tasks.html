@@ -33,7 +33,11 @@
             <td><a href="{% url 'detail_task' task.id %}">{{ task.name }}</a></td>
             <td>{{ task.status }}</td>
             <td>{{ task.creator }}</td>
-            <td>{{ task.executor }}</td>
+            <td>
+                {% if task.executor %}
+                    {{ task.executor }}
+                {% endif %}
+            </td>
             <td>{{ task.created_at }}</td>
             <td>
                 <a href="{% url 'update_task' task.id %}">{% translate "Edit" %}</a>

@@ -31,6 +31,8 @@ class Task(models.Model):
                                 verbose_name=_('Creator'))
 
     executor = models.ForeignKey(User,
+                                 null=True,
+                                 blank=True,
                                  related_name='task_executor',
                                  on_delete=models.PROTECT,
                                  verbose_name=_('Executor'))
