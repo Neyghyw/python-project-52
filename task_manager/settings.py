@@ -118,6 +118,8 @@ else:
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 
+DATABASES = {'default': DATABASE}
+
 STORAGES = {
     "staticfiles": {
         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
