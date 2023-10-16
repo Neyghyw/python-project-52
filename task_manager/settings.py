@@ -104,15 +104,19 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASE = {
-    'default': dj_database_url.config(
-        # Feel free to alter this value to suit your needs.
-        default=DATABASE_URL,
-        conn_max_age=600
-    )
-}
-
-DATABASES = {'default': DATABASE}
+if RENDER_EXTERNAL_HOSTNAME:
+    DATABASE = {
+        'default': dj_database_url.config(
+            # Feel free to alter this value to suit your needs.
+            default=DATABASE_URL,
+            conn_max_age=600
+        )
+    }
+else:
+    DATABASE = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
+    }
 
 STORAGES = {
     "staticfiles": {
