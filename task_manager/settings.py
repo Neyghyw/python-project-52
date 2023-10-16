@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get('SECRET_KEY', 'key')
-
+DATABASE_URL = os.environ.get('DATABASE_URL')
 # SECURITY WARNING: don't run with debug turned on in production!
 
 # https://docs.djangoproject.com/en/3.0/ref/settings/#allowed-hosts
@@ -104,19 +104,13 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-if RENDER_EXTERNAL_HOSTNAME:
-    DATABASE = {
-        'default': dj_database_url.config(
-            # Feel free to alter this value to suit your needs.
-            default='postgresql://postgres:postgres@localhost:5432/task_manager',
-            conn_max_age=600
-        )
-    }
-else:
-    DATABASE = {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+DATABASE = {
+    'default': dj_database_url.config(
+        # Feel free to alter this value to suit your needs.
+        default=DATABASE_URL,
+        conn_max_age=600
+    )
+}
 
 DATABASES = {'default': DATABASE}
 
