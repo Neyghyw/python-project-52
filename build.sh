@@ -4,5 +4,5 @@ set -o errexit
 
 poetry install
 
-python task_manager/manage.py collectstatic --no-input
-python task_manager/manage.py migrate
+python manage.py collectstatic --no-input
+python manage.py migrate
