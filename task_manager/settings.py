@@ -109,6 +109,7 @@ if RENDER_EXTERNAL_HOSTNAME:
     DATABASE = {
         'default': dj_database_url.config(
             # Feel free to alter this value to suit your needs.
+            engine='django.db.backends.postgresql',
             default=DATABASE_URL,
             conn_max_age=600
         )
