@@ -9,7 +9,7 @@ from task_manager.statuses.mixins import StatusAccessMixin
 from task_manager.statuses.models import Status
 
 
-class StatusListView(ListView, LoginRequiredMixin):
+class StatusListView(LoginRequiredMixin, ListView):
     model = Status
     template_name = 'statuses/statuses.html'
     context_object_name = 'statuses'

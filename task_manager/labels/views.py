@@ -9,7 +9,7 @@ from task_manager.labels.mixins import LabelAccessMixin
 from task_manager.labels.models import Label
 
 
-class LabelsListView(ListView, LoginRequiredMixin):
+class LabelsListView(LoginRequiredMixin, ListView):
     model = Label
     template_name = 'labels/labels.html'
     context_object_name = 'labels'
