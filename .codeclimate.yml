@@ -1,0 +1,6 @@
+plugins:
+  pylint:
+    enabled: true
+    plugins:
+      - django
+    django_settings_module: task_manager.settings
