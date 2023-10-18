@@ -4,3 +4,24 @@ plugins:
     plugins:
       - django
     django_settings_module: task_manager.settings
+exclude_patterns:
+- "tests/"
+- "spec/"
+- "config/"
+- "db/"
+- "dist/"
+- "staticfiles/"
+- "migrations/"
+- "**/staticfiles/"
+- "**/migrations/"
+- "features/"
+- "**/node_modules/"
+- "script/"
+- "**/spec/"
+- "**/test/"
+- "**/tests/"
+- "Tests/"
+- "**/vendor/"
+- "**/*_test.go"
+- "**/*.d.ts"
+- "**/urls.py"
