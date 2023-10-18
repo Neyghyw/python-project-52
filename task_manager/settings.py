@@ -106,10 +106,10 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 
 if RENDER_EXTERNAL_HOSTNAME:
     DATABASE = dj_database_url.config(
-            # Feel free to alter this value to suit your needs.
-            default=DATABASE_URL,
-            conn_max_age=600
-        )
+        # Feel free to alter this value to suit your needs.
+        default=DATABASE_URL,
+        conn_max_age=600
+    )
 else:
     DATABASE = {
         'ENGINE': 'django.db.backends.sqlite3',
