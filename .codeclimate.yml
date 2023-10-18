@@ -1,9 +1,6 @@
 plugins:
-  pylint:
-    enabled: false
-    plugins:
-      - django
-    django_settings_module: task_manager.settings
+  - django
+django_settings_module: task_manager.settings
 exclude_patterns:
 - "tests/"
 - "spec/"
